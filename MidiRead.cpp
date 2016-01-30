@@ -73,7 +73,6 @@ int MidiRead::readFile() {
     start_tick.clear();
     tmp_note = vector<note_tmp>(256);
 
-
     for (int event=0; event < midifile[0].size(); event++) {
         mev = &midifile[_track][event];
         if (event == 0) {
@@ -110,7 +109,14 @@ int MidiRead::readFile() {
             }
         }
     }
+    if(min_note_size <= 0) {
+      int tmp = min_note_size;
+      min_note_size = delta;
+      convert_notes();
+      min_note_size = tmp;
 
-    convert_notes();
+    } else {
+      convert_notes();
+    }
     return 1;
 }
