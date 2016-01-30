@@ -1,6 +1,4 @@
-#include "MIterator.h"
-#include "NIterator.h"
-#include "MidiRead.h"
+#include "libscore.h"
 #include <string>
 #include <stdio.h>
 
