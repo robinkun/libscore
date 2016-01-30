@@ -8,7 +8,6 @@
 #include <midifile/Options.h>
 #include <string>
 #include <list>
-#include <QObject>
 
 class note_tmp;
 

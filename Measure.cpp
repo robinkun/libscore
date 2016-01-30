@@ -3,8 +3,10 @@
 Measure::Measure() {
     _prev = nullptr;
     _next = nullptr;
-    _first = nullptr;
-    _last = nullptr;
+    _first = &_begin;
+    _last = &_end;
+    _begin.setPrev(nullptr);
+    _end.setNext(nullptr);
     _time = 1;
 }
 
@@ -25,17 +27,18 @@ Measure::~Measure() {
 --------------------------------------------*/
 void Measure::push_back(Note* n) {
     _size++;
-    if(_last == nullptr) {
+    if(_last == &_end) {
         _last = n;
         _first = n;
-        _last->setPrev(nullptr);
-        _first->setNext(nullptr);
+        _last->setPrev(&_begin);
+        _first->setNext(&_end);
     }
     else {
         _last->setNext(n);
         _last->next()->setPrev(_last);
         _last = _last->next();
-        _last->setNext(nullptr);
+        _last->setNext(&_end);
+        _end.setPrev(_last);
     }
 }
 
@@ -44,17 +47,18 @@ void Measure::push_back(Note* n) {
 --------------------------------------------*/
 void Measure::push_front(Note* n) {
     _size++;
-    if(_first == nullptr) {
+    if(_first == &_begin) {
         _last = n;
         _first = n;
-        _last->setPrev(nullptr);
-        _first->setNext(nullptr);
+        _last->setPrev(&_begin);
+        _first->setNext(&_end);
     }
     else {
         _first->setPrev(n);
         _first->prev()->setNext(_first);
         _first = _first->prev();
-        _first->setPrev(nullptr);
+        _first->setPrev(&_begin);
+        _begin.setNext(_first);
     }
 }
 

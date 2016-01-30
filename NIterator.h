@@ -17,7 +17,6 @@ public:
     Note* operator*();
     NIterator operator=(Note* m);
     operator Note*();
-    bool isEnd();
 };
 
 #endif // NITERATOR_H

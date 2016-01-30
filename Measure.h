@@ -9,6 +9,8 @@
 class Measure {
     Measure* _prev;
     Measure* _next;
+    Note _begin;
+    Note _end;
     Note* _first;
     Note* _last;
     boost::rational<int> _time;
@@ -33,6 +35,8 @@ public:
     void push_front(Note*);
     void pop_back();
     void pop_front();
+    Note* begin()                   {return &_begin;}
+    Note* end()                     {return &_end;}
 };
 
 #endif // MEASURE_H

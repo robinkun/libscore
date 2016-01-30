@@ -11,6 +11,8 @@ class MeasureList {
     int _size;
     Measure* _first;
     Measure* _last;
+    Measure _begin;
+    Measure _end;
 public:
     MeasureList();
     ~MeasureList();
@@ -21,6 +23,8 @@ public:
     void pop_front();
     Measure* first()                {return _first;}
     Measure* last()                 {return _last;}
+    Measure* begin()                {return &_begin;}
+    Measure* end()                  {return &_end;}
 };
 
 #endif // MEASURELIST_H

@@ -18,7 +18,10 @@ Measure* MIterator::operator->() {
  * イテレータが指すポインタをリストの次の要素に移す
 --------------------------------------------*/
 Measure* MIterator::operator++(int) {
-    if(measure == nullptr) return nullptr;
+    if(measure == nullptr) {
+        puts("null pointer");
+        exit(1);
+    }
     Measure* old = measure;
     measure = measure->next();
     return old;
@@ -29,7 +32,10 @@ Measure* MIterator::operator++(int) {
  * イテレータが指すポインタをリストの前の要素に移す
 --------------------------------------------*/
 Measure* MIterator::operator--(int) {
-    if(measure == nullptr) return nullptr;
+    if(measure == nullptr) {
+        puts("null pointer");
+        exit(1);
+    }
     Measure* old = measure;
     measure = measure->prev();
     return old;
@@ -56,10 +62,3 @@ MIterator::operator Measure*() {
     return measure;
 }
 
-/*--------------------------------------------
- * endかどうかを調べてるわけじゃないけど、多分大丈夫
---------------------------------------------*/
-bool MIterator::isEnd() {
-    if(measure == nullptr) return true;
-    return false;
-}

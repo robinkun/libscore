@@ -18,7 +18,10 @@ Note* NIterator::operator->() {
  * イテレータが指すポインタをリストの次の要素に移す
 --------------------------------------------*/
 Note* NIterator::operator++(int) {
-    if(note == nullptr) return nullptr;
+    if(note == nullptr) {
+        puts("null pointer");
+        exit(1);
+    }
     Note* old = note;
     note = note->next();
     return old;
@@ -29,7 +32,10 @@ Note* NIterator::operator++(int) {
  * イテレータが指すポインタをリストの前の要素に移す
 --------------------------------------------*/
 Note* NIterator::operator--(int) {
-    if(note == nullptr) return nullptr;
+    if(note == nullptr) {
+        puts("null pointer");
+        exit(1);
+    }
     Note* old = note;
     note = note->prev();
     return old;
@@ -54,13 +60,5 @@ NIterator NIterator::operator=(Note* n) {
 --------------------------------------------*/
 NIterator::operator Note*() {
     return note;
-}
-
-/*--------------------------------------------
- * endかどうかを調べてるわけじゃないけど、多分大丈夫
---------------------------------------------*/
-bool NIterator::isEnd() {
-    if(note == nullptr) return true;
-    return false;
 }
 

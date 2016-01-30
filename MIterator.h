@@ -17,7 +17,6 @@ public:
     Measure* operator*();
     MIterator operator=(Measure* m);
     operator Measure*();
-    bool isEnd();
 };
 
 #endif // MITERATOR_H

@@ -2,8 +2,10 @@
 
 MeasureList::MeasureList() {
     _size = 0;
-    _first = nullptr;
-    _last = nullptr;
+    _first = &_begin;
+    _last = &_end;
+    _begin.setPrev(nullptr);
+    _end.setNext(nullptr);
 }
 
 /*--------------------------------------------
@@ -25,17 +27,18 @@ MeasureList::~MeasureList() {
 --------------------------------------------*/
 void MeasureList::push_back(Measure* m) {
     _size++;
-    if(_last == nullptr) {
+    if(_last == &_end) {
         _last = m;
         _first = m;
-        _last->setPrev(nullptr);
-        _first->setNext(nullptr);
+        _last->setPrev(&_begin);
+        _first->setNext(&_end);
     }
     else {
         _last->setNext(m);
         _last->next()->setPrev(_last);
         _last = _last->next();
-        _last->setNext(nullptr);
+        _last->setNext(&_end);
+        _end.setPrev(_last);
     }
 }
 
@@ -44,17 +47,18 @@ void MeasureList::push_back(Measure* m) {
 --------------------------------------------*/
 void MeasureList::push_front(Measure* m) {
     _size++;
-    if(_first == nullptr) {
+    if(_first == &_begin) {
         _last = m;
         _first = m;
-        _last->setPrev(nullptr);
-        _first->setNext(nullptr);
+        _last->setPrev(&_begin);
+        _first->setNext(&_end);
     }
     else {
         _first->setPrev(m);
         _first->prev()->setNext(_first);
         _first = _first->prev();
-        _first->setPrev(nullptr);
+        _first->setPrev(&_begin);
+        _begin.setNext(_first);
     }
 }
 
