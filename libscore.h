@@ -8,6 +8,7 @@
 #include "NIterator.h"
 #include "Note.h"
 #include "Score.h"
+#define OCTAVE 12
 
 #endif // LIBSCORE
 

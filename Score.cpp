@@ -1,6 +1,6 @@
 #include "Score.h"
 
-/*Score::Score() {
-
+Score::Score() {
+    _min_pitch = _max_pitch = 0;
 }
-*/
+

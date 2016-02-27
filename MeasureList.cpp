@@ -2,18 +2,18 @@
 
 MeasureList::MeasureList() {
     _size = 0;
-    _first = &_begin;
-    _last = &_end;
-    _begin.setPrev(nullptr);
-    _end.setNext(nullptr);
+    _front = &_end;
+    _back = &_end;
+    _end.setPrev(&_end); // 果たしてこれは正しいのだろうか
+    _end.setNext(&_end);
 }
 
 /*--------------------------------------------
  * デストラクタ
 --------------------------------------------*/
 MeasureList::~MeasureList() {
-    Measure* i = _first;
-    Measure* tmp = _first;
+    Measure* i = _front;
+    Measure* tmp = _front;
 
     while(i != nullptr) {
         tmp = i->next();
@@ -27,18 +27,18 @@ MeasureList::~MeasureList() {
 --------------------------------------------*/
 void MeasureList::push_back(Measure* m) {
     _size++;
-    if(_last == &_end) {
-        _last = m;
-        _first = m;
-        _last->setPrev(&_begin);
-        _first->setNext(&_end);
+    if(_back == &_end) {
+        _back = m;
+        _front = m;
+        _back->setPrev(&_end);
+        _front->setNext(&_end);
     }
     else {
-        _last->setNext(m);
-        _last->next()->setPrev(_last);
-        _last = _last->next();
-        _last->setNext(&_end);
-        _end.setPrev(_last);
+        _back->setNext(m);
+        _back->next()->setPrev(_back);
+        _back = _back->next();
+        _back->setNext(&_end);
+        _end.setPrev(_back);
     }
 }
 
@@ -47,18 +47,18 @@ void MeasureList::push_back(Measure* m) {
 --------------------------------------------*/
 void MeasureList::push_front(Measure* m) {
     _size++;
-    if(_first == &_begin) {
-        _last = m;
-        _first = m;
-        _last->setPrev(&_begin);
-        _first->setNext(&_end);
+    if(_front == &_end) {
+        _back = m;
+        _front = m;
+        _back->setPrev(&_end);
+        _front->setNext(&_end);
     }
     else {
-        _first->setPrev(m);
-        _first->prev()->setNext(_first);
-        _first = _first->prev();
-        _first->setPrev(&_begin);
-        _begin.setNext(_first);
+        _front->setPrev(m);
+        _front->prev()->setNext(_front);
+        _front = _front->prev();
+        _front->setPrev(&_end);
+        _end.setNext(_front);
     }
 }
 
@@ -66,14 +66,14 @@ void MeasureList::push_front(Measure* m) {
  * リストのpop_back
 --------------------------------------------*/
 void MeasureList::pop_back() {
-    if(_first == nullptr) {
+    if(_front == nullptr) {
         return;
     } else {
-        _first = _first->next();
-        if(_first != _last) {
-            delete _first->prev();
+        _front = _front->next();
+        if(_front != _back) {
+            delete _front->prev();
         }
-        _first->setPrev(nullptr);
+        _front->setPrev(nullptr);
         _size--;
     }
 }
@@ -82,14 +82,14 @@ void MeasureList::pop_back() {
  * リストのpop_front
 --------------------------------------------*/
 void MeasureList::pop_front() {
-    if(_last == nullptr) {
+    if(_back == nullptr) {
         return;
     } else {
-        _last = _last->prev();
-        if(_last != _first) {
-            delete _last->next();
+        _back = _back->prev();
+        if(_back != _front) {
+            delete _back->next();
         }
-        _last->setNext(nullptr);
+        _back->setNext(nullptr);
         _size--;
     }
 }

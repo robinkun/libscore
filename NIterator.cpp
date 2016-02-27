@@ -7,7 +7,7 @@
 --------------------------------------------*/
 Note* NIterator::operator->() {
     if(note == nullptr) {
-        puts("null pointer");
+        puts("N->null pointer");
         exit(1);
     }
     return note;
@@ -19,7 +19,7 @@ Note* NIterator::operator->() {
 --------------------------------------------*/
 Note* NIterator::operator++(int) {
     if(note == nullptr) {
-        puts("null pointer");
+        puts("N++null pointer");
         exit(1);
     }
     Note* old = note;

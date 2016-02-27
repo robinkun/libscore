@@ -7,7 +7,7 @@
 --------------------------------------------*/
 Measure* MIterator::operator->() {
     if(measure == nullptr) {
-        puts("null pointer");
+        puts("M->null pointer");
         exit(1);
     }
     return measure;
@@ -19,7 +19,7 @@ Measure* MIterator::operator->() {
 --------------------------------------------*/
 Measure* MIterator::operator++(int) {
     if(measure == nullptr) {
-        puts("null pointer");
+        puts("M++null pointer");
         exit(1);
     }
     Measure* old = measure;

@@ -10,6 +10,7 @@
 #include <list>
 
 class note_tmp;
+class tempo_tmp;
 
 class MidiRead {
     Score** _score;
@@ -20,6 +21,7 @@ class MidiRead {
     list<int> start_tick;
     vector<note_tmp> tmp_note;
     list<note_tmp> notes;
+    list<tempo_tmp> tmp_tempo;
     int deltatick; // 次のイベントまでの待ち時間だったと思う
                    // 今見てるイベントを実行するまでの待ち時間かも？←たぶんこっち
     int min_note_size;
@@ -27,7 +29,7 @@ class MidiRead {
 public:
     MidiRead(Score** score, string dir, int trk = 0, int min_note_size = 32);
     ~MidiRead();
-    void convert_notes();
+    void convert_notes(int min_pitch, int max_pitch);
     int round_off_tick(int tick);
     int readFile();
 };

@@ -5,15 +5,27 @@
 #define MEASURE_H
 
 #include "Note.h"
+#include <list>
+
+class Tempo {
+  int _bpm;
+  boost::rational<int> _pos;
+
+  void setBPM(int b)                  {_bpm = b;}
+  int bpm()                           {return _bpm;}
+  boost::rational<int> pos()          {return _pos;}
+  void setPos(boost::rational<int> p) {_pos = p;}
+  void setPos(int n, int d)           {_pos = boost::rational<int>(n, d);}
+};
 
 class Measure {
     Measure* _prev;
     Measure* _next;
-    Note _begin;
     Note _end;
-    Note* _first;
-    Note* _last;
+    Note* _front;
+    Note* _back;
     boost::rational<int> _time;
+    std::list<Tempo> _tempo;
     int _size;
     int _tick;
 public:
@@ -28,15 +40,16 @@ public:
     boost::rational<int> time()          {return _time;}
     void setTime(boost::rational<int> t) {_time = t;}
 
-    Note* first()                   {return _first;}
-    Note* last()                    {return _last;}
+    Note* front()                   {return _front;}
+    Note* back()                    {return _back;}
     int size() const                {return _size;}
     void push_back(Note*);
     void push_front(Note*);
     void pop_back();
     void pop_front();
-    Note* begin()                   {return &_begin;}
+    Note* begin()                   {return _front;}
     Note* end()                     {return &_end;}
+    bool isEmpty()                  {return _size <= 0;}
 };
 
 #endif // MEASURE_H

@@ -9,9 +9,8 @@
 
 class MeasureList {
     int _size;
-    Measure* _first;
-    Measure* _last;
-    Measure _begin;
+    Measure* _front;
+    Measure* _back;
     Measure _end;
 public:
     MeasureList();
@@ -21,10 +20,11 @@ public:
     void push_front(Measure*);
     void pop_back();
     void pop_front();
-    Measure* first()                {return _first;}
-    Measure* last()                 {return _last;}
-    Measure* begin()                {return &_begin;}
+    Measure* front()                {return _front;}
+    Measure* back()                 {return _back;}
+    Measure* begin()                {return _front;}
     Measure* end()                  {return &_end;}
+    bool isEmpty()                  {return _size <= 0;}
 };
 
 #endif // MEASURELIST_H
