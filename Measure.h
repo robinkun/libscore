@@ -27,7 +27,6 @@ class Measure {
     boost::rational<int> _time;
     std::list<Tempo> _tempo;
     int _size;
-    int _tick;
 public:
     Measure();
     ~Measure();
@@ -35,21 +34,19 @@ public:
     void setPrev(Measure* m)        {_prev = m;}
     Measure* next() const           {return _next;}
     void setNext(Measure* m)        {_next = m;}
-    int tick()                      {return _tick;}
-    void setTick(int t)             {_tick = t;}
-    boost::rational<int> time()          {return _time;}
+    boost::rational<int> time() const    {return _time;}
     void setTime(boost::rational<int> t) {_time = t;}
 
-    Note* front()                   {return _front;}
-    Note* back()                    {return _back;}
+    Note* front() const             {return _front;}
+    Note* back() const              {return _back;}
     int size() const                {return _size;}
     void push_back(Note*);
     void push_front(Note*);
     void pop_back();
     void pop_front();
-    Note* begin()                   {return _front;}
+    Note* begin() const             {return _front;}
     Note* end()                     {return &_end;}
-    bool isEmpty()                  {return _size <= 0;}
+    bool isEmpty() const            {return _size <= 0;}
 };
 
 #endif // MEASURE_H

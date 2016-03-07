@@ -47,7 +47,6 @@ void MidiRead::convert_notes(int min_pitch, int max_pitch) {
     int measure_num;
     int current_measure = -1; // こうしないとMeasureが作られない
 
-    list<tempo_tmp>::iterator j = tmp_tempo.begin();
     for(list<note_tmp>::iterator i = notes.begin(); i != notes.end(); i++) {
         measure_num = i->start_tick / (delta*4);
         for(; current_measure < measure_num; current_measure++) {
